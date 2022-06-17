@@ -1,0 +1,6 @@
+Rental Record for Alejandro
+    Titanic | 14
+    The Godfather  | 3
+    Shrek 2 | 15
+Amount owed is 32
+You earned 4 frequent renter points
