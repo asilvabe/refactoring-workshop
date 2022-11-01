@@ -21,25 +21,17 @@ class Customer
         return $this->name;
     }
 
-    public function statement(): string
+    public function getRentals(): array
     {
-        // add header line
-        $result = 'Rental Record for ' . $this->getName() . PHP_EOL;
-
-        // add detail lines
-        /** @var Rental $each */
-        foreach($this->rentals as $each) {
-            $result .= '    ' . $each->getMovie()->getTitle() . " | " . $each->getCharge() . PHP_EOL;
-        }
-
-        // add footer lines
-        $result .= 'Amount owed is ' . $this->getTotalCharge() . PHP_EOL;
-        $result .= 'You earned ' . $this->getTotalFrequentRenterPoints() . ' frequent renter points';
-
-        return $result;
+        return $this->rentals;
     }
 
-    private function getTotalCharge(): float
+    public function statement(): string
+    {
+        return (new TextStatement())->value($this);
+    }
+
+    public function getTotalCharge(): float
     {
         $result = 0;
 
@@ -50,7 +42,7 @@ class Customer
         return $result;
     }
 
-    private function getTotalFrequentRenterPoints(): float
+    public function getTotalFrequentRenterPoints(): float
     {
         $result = 0;
 
