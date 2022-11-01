@@ -23,7 +23,6 @@ class Customer
 
     public function statement(): string
     {
-        $totalAmount = 0;
         $frequentRenterPoints = 0;
 
         // add header line
@@ -35,12 +34,22 @@ class Customer
 
             // show figures for this rental
             $result .= '    ' . $each->getMovie()->getTitle() . " | " . $each->getCharge() . PHP_EOL;
-            $totalAmount += $each->getCharge();
         }
 
         // add footer lines
-        $result .= 'Amount owed is ' . $totalAmount . PHP_EOL;
+        $result .= 'Amount owed is ' . $this->getTotalCharge() . PHP_EOL;
         $result .= 'You earned ' . $frequentRenterPoints . ' frequent renter points';
+
+        return $result;
+    }
+
+    private function getTotalCharge(): float
+    {
+        $result = 0;
+
+        foreach ($this->rentals as $rental) {
+            $result += $rental->getCharge();
+        }
 
         return $result;
     }
