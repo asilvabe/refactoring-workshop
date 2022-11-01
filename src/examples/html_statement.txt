@@ -1,0 +1,8 @@
+<h1>Rental Record for Alejandro</h1>
+<ul>
+    <li>Titanic | 14</li>
+    <li>The Godfather  | 3</li>
+    <li>Shrek 2 | 15</li>
+</ul>
+<p>Amount owed is 32</p>
+<p>You earned 4 frequent renter points</p>
