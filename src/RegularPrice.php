@@ -2,11 +2,13 @@
 
 namespace Src;
 
+use Src\Constans\MoviePriceCodes;
+
 class RegularPrice extends Price
 {
     public function getPriceCode(): int
     {
-        return Movie::REGULAR;
+        return MoviePriceCodes::REGULAR;
     }
 
     public function getCharge(int $daysRented): float

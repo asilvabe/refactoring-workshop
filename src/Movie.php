@@ -3,13 +3,10 @@
 namespace Src;
 
 use Exception;
+use Src\Constans\MoviePriceCodes;
 
 class Movie
 {
-    public const REGULAR = 0;
-    public const NEW_RELEASE = 1;
-    public const CHILDRENS = 2;
-
     private Price $price;
 
     public function __construct(
@@ -35,9 +32,9 @@ class Movie
     public function setPriceCode(int $priceCode): void
     {
         match ($priceCode) {
-            Movie::REGULAR => $this->price = new RegularPrice(),
-            Movie::NEW_RELEASE => $this->price = new NewReleasePrice(),
-            Movie::CHILDRENS => $this->price = new ChildrensPrice(),
+            MoviePriceCodes::REGULAR => $this->price = new RegularPrice(),
+            MoviePriceCodes::NEW_RELEASE => $this->price = new NewReleasePrice(),
+            MoviePriceCodes::CHILDRENS => $this->price = new ChildrensPrice(),
             default => throw new Exception('Bad price code'),
         };
     }
