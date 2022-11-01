@@ -31,8 +31,6 @@ class Customer
 
         // add detail lines
         foreach($this->rentals as $each) {
-            $thisAmount = $each->getCharge();
-
             // add frequent renter points
             $frequentRenterPoints++;
 
@@ -42,8 +40,8 @@ class Customer
             }
 
             // show figures for this rental
-            $result .= '    ' . $each->getMovie()->getTitle() . " | " . $thisAmount . PHP_EOL;
-            $totalAmount += $thisAmount;
+            $result .= '    ' . $each->getMovie()->getTitle() . " | " . $each->getCharge() . PHP_EOL;
+            $totalAmount += $each->getCharge();
         }
 
         // add footer lines
