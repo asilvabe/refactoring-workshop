@@ -23,22 +23,17 @@ class Customer
 
     public function statement(): string
     {
-        $frequentRenterPoints = 0;
-
         // add header line
         $result = 'Rental Record for ' . $this->getName() . PHP_EOL;
 
         // add detail lines
         foreach($this->rentals as $each) {
-            $frequentRenterPoints += $each->getFrequentRenterPoints();
-
-            // show figures for this rental
             $result .= '    ' . $each->getMovie()->getTitle() . " | " . $each->getCharge() . PHP_EOL;
         }
 
         // add footer lines
         $result .= 'Amount owed is ' . $this->getTotalCharge() . PHP_EOL;
-        $result .= 'You earned ' . $frequentRenterPoints . ' frequent renter points';
+        $result .= 'You earned ' . $this->getTotalFrequentRenterPoints() . ' frequent renter points';
 
         return $result;
     }
@@ -49,6 +44,17 @@ class Customer
 
         foreach ($this->rentals as $rental) {
             $result += $rental->getCharge();
+        }
+
+        return $result;
+    }
+
+    private function getTotalFrequentRenterPoints(): float
+    {
+        $result = 0;
+
+        foreach ($this->rentals as $rental) {
+            $result += $rental->getFrequentRenterPoints();
         }
 
         return $result;
