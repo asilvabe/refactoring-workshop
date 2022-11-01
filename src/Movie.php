@@ -3,7 +3,7 @@
 namespace Src;
 
 use Exception;
-use Src\Constans\MoviePriceCodes;
+use Src\Factories\PriceFactory;
 
 class Movie
 {
@@ -31,12 +31,7 @@ class Movie
      */
     public function setPriceCode(int $priceCode): void
     {
-        match ($priceCode) {
-            MoviePriceCodes::REGULAR => $this->price = new RegularPrice(),
-            MoviePriceCodes::NEW_RELEASE => $this->price = new NewReleasePrice(),
-            MoviePriceCodes::CHILDRENS => $this->price = new ChildrensPrice(),
-            default => throw new Exception('Bad price code'),
-        };
+        $this->price = (new PriceFactory())->create($priceCode);
     }
 
     public function getCharge(int $daysRented): float

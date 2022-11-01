@@ -27,6 +27,7 @@ class Customer
         $result = 'Rental Record for ' . $this->getName() . PHP_EOL;
 
         // add detail lines
+        /** @var Rental $each */
         foreach($this->rentals as $each) {
             $result .= '    ' . $each->getMovie()->getTitle() . " | " . $each->getCharge() . PHP_EOL;
         }
