@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Src\Constans\MoviePriceCodes;
 use Src\Customer;
@@ -11,7 +12,10 @@ use Tests\Factories\StatementFactory;
 
 class CustomerTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     * @throws Exception
+     */
     function rental(): void
     {
         $customerName = 'Customer name';
@@ -93,6 +97,32 @@ class CustomerTest extends TestCase
             ->create();
 
         $this->assertEquals($expected, $customer->statement());
+    }
+
+    /**
+     * @test
+     * @throws Exception
+     */
+    public function html_statement(): void
+    {
+        $customerName = 'Alejandro';
+        $regularMovieName = 'Titanic';
+
+        $regularMovie = new Movie($regularMovieName, MoviePriceCodes::REGULAR);
+
+        $regularRental = new Rental($regularMovie, 10);
+
+        $customer = new Customer($customerName);
+        $customer->addRental($regularRental);
+
+        $expected = (new StatementFactory())
+            ->customerName($customerName)
+            ->movie($regularMovieName, 14)
+            ->totalAmount(14)
+            ->frequentRenterPoints(1)
+            ->createHtml();
+
+        $this->assertEquals($expected, $customer->htmlStatement());
     }
 
     public function statementProvider(): array

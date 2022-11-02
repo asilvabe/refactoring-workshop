@@ -31,6 +31,11 @@ class Customer
         return (new TextStatement())->value($this);
     }
 
+    public function htmlStatement(): string
+    {
+        return (new HtmlStatement())->value($this);
+    }
+
     public function getTotalCharge(): float
     {
         $result = 0;

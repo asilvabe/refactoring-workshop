@@ -52,4 +52,23 @@ class StatementFactory
 
         return $result;
     }
+
+    public function createHtml(): string
+    {
+        $result = '<h1>Rental Record for ' . $this->customerName . '</h1>' . PHP_EOL;
+
+        $result .= '<ul>' . PHP_EOL;
+
+        for ($i = 0; $i < count($this->movieNames); $i++) {
+            $result .= '    <li>' . $this->movieNames[$i] . " | " . $this->amounts[$i] . '</li>' . PHP_EOL;
+        }
+
+        $result .= '</ul>' . PHP_EOL;
+
+        $result .=
+            '<p>Amount owed is ' . $this->totalAmount . '</p>' . PHP_EOL .
+            '<p>You earned ' . $this->frequentRenterPoints . ' frequent renter points</p>';
+
+        return $result;
+    }
 }
