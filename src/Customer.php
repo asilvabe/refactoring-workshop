@@ -40,6 +40,7 @@ class Customer
     {
         $result = 0;
 
+        /** @var Rental $rental */
         foreach ($this->rentals as $rental) {
             $result += $rental->getCharge();
         }
@@ -51,6 +52,7 @@ class Customer
     {
         $result = 0;
 
+        /** @var Rental $rental */
         foreach ($this->rentals as $rental) {
             $result += $rental->getFrequentRenterPoints();
         }
